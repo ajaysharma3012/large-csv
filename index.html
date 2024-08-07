@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Merger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <img src="https://media.licdn.com/dms/image/C510BAQH-UJBWlTNkGA/company-logo_200_200/0/1631409554283/genus_power_infrastructure_ltd_logo?e=1730937600&v=beta&t=a5LhGmFzq61daxtVTxzhg50HcvuNoiMIQQlOWkJMB1s" alt="Genus Power Logo">
+        <h1>Excel Merger</h1>
+    </div>
+    <div class="container">
+        <form id="uploadForm">
+            <div class="upload-section">
+                <h2>Master Sheet</h2>
+                <div class="form-group">
+                    <label for="masterFile">Upload Master Excel/CSV:</label>
+                    <input type="file" id="masterFile" name="masterFile" accept=".csv,.xlsx,.xls" required>
+                </div>
+            </div>
+            <div class="upload-section">
+                <h2>Secondary Sheets</h2>
+                <div class="form-group">
+                    <label for="secondaryFiles">Upload Secondary Excel/CSV Files (up to 50):</label>
+                    <input type="file" id="secondaryFiles" name="secondaryFiles" accept=".csv,.xlsx,.xls" multiple required>
+                </div>
+                <div class="form-group">
+                    <label for="rowsToDelete">Number of Rows to Delete from Secondary Sheets:</label>
+                    <input type="number" id="rowsToDelete" name="rowsToDelete" min="0" value="0" required>
+                </div>
+            </div>
+            <button type="submit">Merge Excel Files</button>
+        </form>
+        <div id="fileList"></div>
+        <div id="progressBar"><div></div></div>
+        <div id="message"></div>
+        <div id="downloadButton" style="display: none;">Download Merged File</div>
+    </div>
+    <div id="attribution">Created by <a href="https://www.linkedin.com/in/ajay-kumar-sharma1/" target="_blank">Ajay Sharma</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
