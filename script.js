@@ -43,27 +43,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   
     async function callGoogleAppsScript(masterFile, secondaryFiles, rowsToDelete) {
-      const formData = new FormData();
-      formData.append('masterFile', await toBase64(masterFile));
-      for (let i = 0; i < secondaryFiles.length; i++) {
-        formData.append('secondaryFiles', await toBase64(secondaryFiles[i]));
-      }
-      formData.append('rowsToDelete', rowsToDelete);
-  
-      const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbxHy7jcgl5StOTn0Rid-EM32VwxCQa2YrjMC9ZD_K3hoX2M194zCjP5p4S2ZAZ0Fo1Okg/exec',
-        {
-          method: 'POST',
-          body: JSON.stringify({ masterFile, secondaryFiles, rowsToDelete }),
+        const formData = new FormData();
+        formData.append('masterFile', await toBase64(masterFile));
+        for (let i = 0; i < secondaryFiles.length; i++) {
+          formData.append('secondaryFiles', await toBase64(secondaryFiles[i]));
         }
-      );
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+        formData.append('rowsToDelete', rowsToDelete);
+      
+        const response = await fetch(
+          'https://script.google.com/macros/s/AKfycbxHy7jcgl5StOTn0Rid-EM32VwxCQa2YrjMC9ZD_K3hoX2M194zCjP5p4S2ZAZ0Fo1Okg/exec',
+          {
+            method: 'POST',
+            body: formData,
+          }
+        );
+      
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+      
+        return await response.blob();
       }
-  
-      return await response.blob();
-    }
   
     async function toBase64(file) {
       return new Promise((resolve, reject) => {
